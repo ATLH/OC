@@ -1,0 +1,339 @@
+body
+{
+    margin: 0;
+    padding: 0;
+}
+a
+{
+    text-decoration: none !important;
+}
+cite
+{
+    font-style: normal;
+}
+#bg3
+{
+    height: 400px;
+}
+p
+{
+    font-size: 20px;
+}
+#divMore
+{
+    height: 150px;
+    overflow: hidden;
+}
+#more
+{
+    display: none;
+}
+#author2
+{
+    height: 200px; 
+    width: 200px; 
+    border-radius: 50%;
+}
+#author2Connexion
+{
+    height: 80px; 
+    width: 80px; 
+    border-radius: 50%;
+}
+#inputContainer
+{
+    margin-bottom: -1px;
+}
+#emailInput
+{
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+#passwordInput
+{
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;  
+}
+
+#bg1_background
+{
+    height: 600px; 
+    opacity: 0.6;
+}
+#bg4
+{
+    height: 350px;
+    width: 100%;
+}
+#section1_content
+{
+    height: 600px;
+}
+#blackBackground
+{
+    background-color: black;
+}
+#signature
+{
+    width: 200px;
+    height: 150px;
+}
+#auteurSection
+{
+    height: 400px;
+}
+#section1, #connexionSection
+{
+    height: 600px;
+    margin-top: 70px;
+}
+#contactSection
+{
+    height: 700px;
+}
+textarea
+{
+    height: 200px !important;
+}
+section
+{
+    height: inherit;
+    max-width: 1500px;
+    margin-top: 70px;
+}
+footer
+{
+    width: 100%; 
+    max-width: 1500px; 
+    margin: auto; 
+    height: inherit;
+}
+li
+{
+    list-style: none;
+}
+span
+{
+    font-size: 20px;
+}
+#date
+{
+    float: right;
+    font-size: 13px;
+}
+#quoteSection, #imgContent, #imgSection3
+{
+    height: 350px;
+    margin-top: 0;
+}
+#imgSection3
+{
+    opacity: 0.4;
+}
+#connexionContent
+{
+    height: 600px;
+}
+#imgContent
+{
+    background-color: black;
+}
+#imgSection3Container
+{
+    position: relative;
+}
+#quoteContainer
+{ 
+    z-index: 2;
+}
+#slider
+{
+    width: 500%;
+}
+#section3
+{
+    height: 500px;
+}
+h2
+{
+    font-size: 40px !important;
+}
+h3
+{
+    font-size: 18px;
+}
+blockquote
+{
+    font-style: italic; 
+    font-size: 20px;
+}
+.sliderImg
+{
+    width: 150px; 
+    height: 230px;
+}
+#btnLeftBook, #btnRightBook, #btnLeft, #btnRight
+{
+    width: 50px;
+    cursor: pointer;
+    text-decoration: none;
+}
+i
+{
+    font-size: 50px;
+}
+h4 i
+{
+    font-size: 15px;
+}
+.sliderImg
+{
+    transition: ease 1s;
+}.sliderImg:hover
+{
+    transform: scale(1.1);
+}
+#facebook, #instagram, #twitter
+{
+    font-size: 20px;
+}
+#bookSlider
+{
+    height: 300px;
+}
+#prgrphFooter
+{
+    font-size: 15px;
+}
+form
+{
+    flex-basis: auto !important;
+}
+#smartphone_Button
+{
+    display: none;
+}
+@media all and (max-width: 700px)
+{
+    #smartphone_Button
+    {
+    display: block;
+    }
+    #bg4
+    {
+    width: 100% !important;
+    }
+    h2
+    {
+    font-size: 25px !important;
+    }
+    h1
+    {
+        text-align: center;
+    }
+    #bg4
+    {
+    height: 400px;
+    width: 100%;
+    }
+    h3
+    {
+    font-size: 20px !important;
+    }
+    #bookRow
+    {
+        width: 240px;
+    }
+    #headline
+    {
+        display: none;
+        text-align: center;
+    }
+    #bookContainer
+    {
+        width: 200px;
+    }
+    #imgSection3, #imgContent, #quoteSection, #section3
+    {
+        height: 500px;
+        margin-top: 0;
+    }
+    #section2
+    {
+        height: 720px;
+        margin-top: 0px;
+    }
+    #prgrphFooter
+    {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    }
+    #aPropos, #nomAuteur, #bio
+    {
+        text-align: center;
+    }
+    #info
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    #overlay
+    {
+    width: 70%; 
+    height: 100%; 
+    transform: translateX(-100%); 
+    z-index: 5; 
+    background-color: white;
+    }
+    #prgrphFooter
+    {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    }
+    #aPropos, #nomAuteur, #bio
+    {
+        text-align: center;
+    }
+    #info
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    #overlay
+    {
+    width: 70%; 
+    height: 100%; 
+    transform: translateX(-100%); 
+    z-index: 5; 
+    background-color: white;
+    border-right: solid black 1px;
+    }
+    #toggler
+    {
+        font-size: 25px;
+    }
+    #btnQuotes
+    {
+        width: 200px;
+    }
+    #desktop_button
+    {
+        display: none !important;
+    }
+    #lll
+    {
+        margin-top: 20px;
+    }
+
+}
+
