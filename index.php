@@ -22,14 +22,20 @@ if (isset($_GET["action"])) {
 			jeanforteroche();
 			break;	
 	}
-} else if ( isset($_GET["actionPost"]) && $_GET["actionPost"] > 0 ) {
-	billet($_GET["actionPost"]);
-} else if ( isset($_POST["lastname"]) && isset($_POST["firstname"]) && isset($_POST["comment"]) ) {
-	addNewComment();
-	billet($_GET["actionPost"]);
+} else if ( isset( $_GET["actionPost"] ) && $_GET["actionPost"] > 0 ) {
+	if ( isset($_POST["lastname"]) && isset($_POST["firstname"]) && isset($_POST["comment"]) ) {
+		addNewComment();
+	    billet($_GET["actionPost"]);
+	} else {
+		billet($_GET["actionPost"]);
+	}
 } else {
 	require_once("view/jeanforteroche.php");
 }
+
+
+
+
 ?>
 
 

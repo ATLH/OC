@@ -22,6 +22,15 @@
 			<h4 class="text-dark" style="font-size: 20px; font-weight: lighter;">Commentaires</h4>
 		</div>
 	</div>
+	<div class="row d-flex justify-content-center">
+		<div class="col-lg-10 d-flex justify-content-left flex-column">
+			<?php while ($comments = $billetComment->fetch()) {
+				?> <div>
+					<p class="text-dark" style="font-size: 20px; font-weight: lighter;"><?php echo "- " . $comments["comment"]; ?></p>
+				</div>
+			<?php } ?>
+		</div>
+	</div>
 </section>
 <section class="container">
 	<div class="row d-flex justify-content-center">
@@ -40,7 +49,7 @@
 <section class="container mt-0" >
 	<div class="row d-flex justify-content-center">
 		<div class="col-lg-10 d-flex justify-content-left">
-			<form action="index.php" method="post" class="col-md-10 p-0">
+			<form action="index.php?actionPost=<?php echo $_GET["actionPost"] ?>" method="post" class="col-md-10 p-0">
 				<div class="form-row m-3 d-flex" style="margin-left: 0 !important;">
 					<div class="col-md-3 pl-0">
 						<label for="titre">Nom</label>
@@ -63,5 +72,6 @@
 	</div>
 </section>
 <script src="js/menu_responsive.js"></script>
+
 <?php $body = ob_get_clean(); ?>
 <?php require("template/template.php"); ?>

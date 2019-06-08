@@ -12,20 +12,24 @@ function romans(){
     $bddQuery = romans();
 	require("view/romans.php");
 }
+// Instance $billetsManagerInstance + apelle de la methode tickets();
 function billets(){
 	$billetsManagerInstance = new BilletsManager();
 	$bddQuery = $billetsManagerInstance->tickets();
 	require("view/billets.php");
 }
+// Instance $billetsManagerInstance + apelle de la methode ticket();
 function billet($actionPost){
 	$billetsManagerInstance = new BilletsManager();
+	$commentManagerInstanceBillet = new commentManager();
+
 	$billetView = $billetsManagerInstance->ticket($actionPost);
+	$billetComment = $commentManagerInstanceBillet->getComment($actionPost);
 	require("view/billet.php");
 }
 function addNewComment(){
 	$commentManagerInstance = new commentManager();
 	$commentManagerInstance->addComment();
-	require("view/billet.php");
 }
 function contact(){
 	require("view/contact.php");
