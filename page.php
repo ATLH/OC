@@ -10,17 +10,17 @@
 					<div class="form-row m-3 d-flex justify-content-center align-items-center">
 						<div class="col-md-5">
 							<label for="titre">titre</label>
-							<input name="titre" type="text" class="form-control" id="titre">
+							<input name="chapter_title" type="text" class="form-control" id="titre">
 						</div>
 						<div class="col-md-5">
 							<label for="texte">texte</label>
-							<input name="texte" type="text" class="form-control" id="texte">
+							<input name="chapter_text" type="text" class="form-control" id="texte">
 						</div>
 					</div>
 					<div class="form-row m-3 d-flex justify-content-center align-items-center">
 						<div class="col-md-5">
 							<label for="date">date</label>
-							<input name="date" type="date" class="form-control" id="date">
+							<input name="chapter_date" type="date" class="form-control" id="date">
 						</div>
 						<div class="col-md-5">
 							<label for="img_url">img</label>
@@ -37,7 +37,9 @@
 			let button = document.getElementById("button");
 			button.addEventListener("click", function() {
 				<?php 
-				if ( isset($_POST["texte"]) ) {
+				if ( isset($_POST["chapter_title"]) && isset($_POST["chapter_text"]) && isset($_POST["chapter_date"]) && isset($_POST["img_url"]) ) {
+					/*echo $_POST["chapter_text"] . " " . $_POST["chapter_title"] . " " . $_POST["chapter_date"] . " " . $_POST["img_url"] ;
+					*/
 					$add = new addToBdd();
 					$add->addData();
 				} else {
