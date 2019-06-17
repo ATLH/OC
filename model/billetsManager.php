@@ -2,7 +2,7 @@
 class BilletsManager {
 	public function tickets(){
 		$bdd = $this->bddConnexion();
-		$bddQuery = $bdd->query("SELECT LEFT(chapter_text, 100) AS excerpt, ID, chapter_title, chapter_date, img_url FROM chapitre ORDER BY ID DESC");
+		$bddQuery = $bdd->query("SELECT LEFT(chapter_text, 100) AS excerpt, LEFT(chapter_text, 300) AS excerpt2, ID, chapter_title, chapter_date, img_url FROM chapitre ORDER BY ID DESC");
 		return $bddQuery;
 	}
 

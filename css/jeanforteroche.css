@@ -189,11 +189,33 @@ h4 i
 .sliderImg
 {
     transition: ease 1s;
-}.sliderImg:hover
+}
+.sliderImg:hover
 {
     transform: scale(1.1);
 }
-#facebook, #instagram, #twitter
+#media, #commentMedia
+{
+    transition: ease 0.5s;
+}
+#media
+{
+    box-shadow: 0px 0px 10px grey;
+}
+#media:hover
+{
+    box-shadow: 20px 20px 20px grey;
+}
+#commentMedia
+{
+   box-shadow: 0px 0px 5px grey;
+}
+#commentMedia:hover
+{
+    box-shadow: 10px 10px 10px grey;
+}
+
+#facebook, #instagram, #twitter, #sign_out
 {
     font-size: 20px;
 }

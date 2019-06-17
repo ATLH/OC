@@ -10,7 +10,17 @@ if ( isset($_GET["action"]) ) {
 			romans();
 			break;
 	    case "billets":
-			billets();
+			getChapters($_GET["action"]);
+			break;
+		case "billet":
+		if ( isset($_POST["lastname"], $_POST["firstname"], $_POST["comment"], $_GET["chapter_ID"]) ) {
+			addNewComment();
+	        getChapter($_GET["view"], $_GET["chapter_ID"]);
+		}
+		if (isset($_GET["view"]) AND $_GET["view"] === "client_view") {
+			getChapter($_GET["view"], $_GET["chapter_ID"]);
+		}
+		
 			break;
 		case "contact":
 		if ( isset($_POST["firstname"], $_POST["lastname"], $_POST["email"], $_POST["message"]) ) {
@@ -34,18 +44,28 @@ if ( isset($_GET["action"]) ) {
 		if ( isset($_POST["login"], $_POST["password"]) ) {
 			connexion( $_POST["login"], $_POST["password"] );
 		} else {
-		    session_start();
+			session_start();
 			ajouterunchapitre();
 		}
 			break;
 		case "meschapitres":
-			meschapitres();
+		getChapters($_GET["adminAction"]);
+			break;
+		case "chapitre":
+		if (isset($_GET["view"]) AND $_GET["view"] === "admin_view") {
+			getChapter($_GET["view"], $_GET["chapter_ID"]);
+		}
 			break;
 	    case "commentaires":
-			commentaires();
+
+	    if ( isset( $_GET["allowComment"] ) ) {
+	    	commentAdmin($_GET["allowComment"], $_GET["comment"]);
+	    } else {
+	    	getAdminComment();
+	    }
 			break;
 		case "message":
-		    message();
+		message();
 			break;
 			/*
 		case "deconnexion":
@@ -54,23 +74,16 @@ if ( isset($_GET["action"]) ) {
 			*/
 	}
 	
-} else if ( isset( $_GET["actionPost"] ) && $_GET["actionPost"] > 0 ) {
-
-	if ( isset($_POST["lastname"], $_POST["firstname"], $_POST["comment"]) ) {
-		addNewComment();
-	    billet($_GET["actionPost"]);
-	} else {
-		billet($_GET["actionPost"]);
-	}
 } else {
 
 	require_once("frontView/jeanforteroche.php");
 
-	$bdd = new PDO("mysql:host=localhost;dbname=jean_forteroche;charset=utf8", "root", "", array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+	/*$bdd = new PDO("mysql:host=localhost;dbname=jean_forteroche;charset=utf8", "root", "", array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
 	$password_hash = password_hash("mila1234", PASSWORD_DEFAULT);
 
 	$bdd->exec("INSERT INTO user (user_ID, lastname, password) VALUES (\"mila\", \"muriel\", \"$password_hash\")");
+	*/
 	
 }
 

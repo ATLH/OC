@@ -18,36 +18,48 @@ function romans() {
     $bddQuery = romans();
 	require("frontView/romans.php");
 }
-// Instance $billetsManagerInstance + apelle de la methode tickets();
-function billets() {
+// Récupère la liste des chapitres plus affichage 
+function getChapters($actionPost) {
 	$billetsManagerInstance = new BilletsManager();
 	$bddQuery = $billetsManagerInstance->tickets();
-	require("frontView/billets.php");
+	if ( $actionPost === "billets" ) {
+    	require("frontView/billets.php");
+    } if ( $actionPost === "meschapitres" ) {
+    	require("backView/meschapitres.php");
+    }	
 }
-// Instance $billetsManagerInstance + apelle de la methode ticket();
-function billet($actionPost) {
+// Récupère un chapitres et ses commentaireq plus affichage 
+function getChapter($view, $actionPost) {
 	$billetsManagerInstance = new BilletsManager();
 	$commentManagerInstanceBillet = new commentManager();
-    
-    // $billetView et $billetComment = valeur retourner par les fonction ticket et getComment
-	$billetView = $billetsManagerInstance->ticket($actionPost);
-	$billetComment = $commentManagerInstanceBillet->getComment($actionPost);
-	require("frontView/billet.php");
+
+    if ($view === "admin_view") {
+    	$billetView = $billetsManagerInstance->ticket($actionPost);
+    	require("backView/readChapter.php");
+    } 
+    if ($view === "client_view") {
+    	$billetView = $billetsManagerInstance->ticket($actionPost);
+	    $billetComment = $commentManagerInstanceBillet->getComment($actionPost);
+	    require("frontView/billet.php");
+    }
+   
 }
+// Ajoute nouveau commentaires 
 function addNewComment() {
 	$commentManagerInstance = new commentManager();
 	$commentManagerInstance->addComment();
 }
+
 function contact() {
 	require("frontView/contact.php");
 }
+// Ajoute nouveau message 
 function addMessage() {
 	$contactManagerInstance = new contactManager();
 	$contactManagerInstance->sendMessage();
 	require("frontView/contact.php");
-
-
 }
+
 function connexionView(){
 	require("frontView/connexion.php");
 }
@@ -62,10 +74,9 @@ function connexion($user_id, $password) {
 	$passwordOk = password_verify($password, $user["password"]);
 	if ($passwordOk) {
 		session_start(); 
-    $_SESSION["lastname"] = $user["lastname"];
-    $_SESSION["firstname"] = $user["user_ID"];
+        $_SESSION["lastname"] = $user["lastname"];
+        $_SESSION["firstname"] = $user["user_ID"];
 		require("backView/ajouterunchapitre.php");
-
 	} else {
 		connexionView();
 	}
@@ -77,14 +88,39 @@ function ajouterunchapitre() {
 	require("backView/ajouterunchapitre.php");
 }
 
-function meschapitres() {
-	require("backView/meschapitres.php");
+
+
+///////////////////////////////////////////////////////////////////
+
+
+function commentAdmin($value ,$commentID) {
+	$commentManagerInstance = new commentManager();
+
+	if ( $value === "true" ) {
+		$commentManagerInstance->allowComment($commentID);
+		$CommentQuery = $commentManagerInstance->getModerationComment();
+		require("backView/commentaires.php");
+		} 
+	if ( $value === "false" ) {
+		$commentManagerInstance->deleteComment($commentID);
+		$CommentQuery = $commentManagerInstance->getModerationComment();
+		require("backView/commentaires.php");
+		} 
 }
 
-function commentaires() {
+function getAdminComment() {
+	$commentManagerInstance = new commentManager();
+	$CommentQuery = $commentManagerInstance->getModerationComment();
 	require("backView/commentaires.php");
 }
 
+function allowComments($vcomment) {
+	$commentManagerInstance = new commentManager();
+   
+}
+
+
+//////////////////////////////////////////////////////////////
 function message() {
 	require("backView/message.php");
 }

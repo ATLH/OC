@@ -1,10 +1,4 @@
-<?php 
 
-
-
-
-
-?>
 
 <?php $title = "ajouterunchapitre" ?>
 
@@ -16,6 +10,7 @@
 <div style="margin-top: 200px;">
 	<?php echo "Bonjour " . $_SESSION["firstname"] . " !"; ?>
 </div>
+
 <script src="js/menu_responsive.js"></script>
 
 <?php $body = ob_get_clean(); ?>

@@ -5,23 +5,21 @@
 <?php $header =  ob_get_clean();  ?>
 
 <?php ob_start(); ?>
-<section class="container-fluid">
+<section class="container">
 <div class="row d-flex justify-content-center flex-wrap align-items-center">
 <?php 
 while ($chapter = $bddQuery->fetch()) {
 ?>
-    <div class="rounded position-relative d-flex align-items-end m-4" style="height: 250px; width: 350px;">
-	    <img class="rounded" style="height: 100%; width: 100%;" src="<?php echo $chapter["img_url"]; ?>" >
-	    <div class="position-absolute rounded-bottom d-flex flex-column justify-content-start align-items-center mt-4" style="height: 100%; width: 100%;">
-	    	<h3 class="text-center text-white"><?php echo $chapter["chapter_title"]; ?></h3>
-	    </div>
-	    <div class="position-absolute bg-white border border-dark border-top-0 rounded-bottom d-flex align-items-center" style="height: 100px; width: 100%;">
-	    	<div class="row m-0">
-	    		<p class="text-left text-dark m-0 col-lg-12" style="font-size: 16px;"><?php echo $chapter["excerpt"]; ?><a href="index.php?actionPost=<?php echo $chapter["ID"]; ?>" class="text-dark font-weight-bold"> Lire la suite</a><span class="" id="date"><?php echo $chapter["chapter_date"]; ?></span>
-	    		</p>
-	    	</div>
-	    </div>
-	</div>
+
+<div class="card m-4" style="width: 18rem;">
+  <img src="<?php echo $chapter["img_url"]; ?>" class="card-img-top" >
+  <div class="card-body">
+    <h3 class="card-title" style="font-size: 20px;"><?php echo $chapter["chapter_title"]; ?></h3>
+    <p class="card-text" style="font-size: 15px;"><?php echo $chapter["excerpt"]; ?>...</p>
+    <a href="index.php?action=billet&chapter_ID=<?php echo $chapter["ID"] ?>&view=client_view" class="btn btn-outline-dark">Lire la suite</a>
+  </div>
+</div>
+
 <?php 
 }
 ?>
