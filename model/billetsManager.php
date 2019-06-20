@@ -6,6 +6,12 @@ class BilletsManager {
 		return $bddQuery;
 	}
 
+	public function ticket_id(){
+		$bdd = $this->bddConnexion();
+		$bddQuery = $bdd->query("SELECT ID FROM chapitre ORDER BY ID ASC");
+		return $bddQuery;
+	}
+
 	public function ticket($billetId){
 		$bdd = $this->bddConnexion();
 		$bddQuery = $bdd->prepare("SELECT ID, chapter_title, chapter_date, img_url, chapter_text FROM chapitre WHERE ID = ?");

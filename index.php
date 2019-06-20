@@ -13,9 +13,8 @@ if ( isset($_GET["action"]) ) {
 			getChapters($_GET["action"]);
 			break;
 		case "billet":
-		if ( isset($_POST["lastname"], $_POST["firstname"], $_POST["comment"], $_GET["chapter_ID"]) ) {
+		if ( isset($_POST["lastname"], $_POST["firstname"], $_POST["comment"], $_GET["chapter_ID"], $_POST["bool"]) ) {
 			addNewComment();
-	        getChapter($_GET["view"], $_GET["chapter_ID"]);
 		}
 		if (isset($_GET["view"]) AND $_GET["view"] === "client_view") {
 			getChapter($_GET["view"], $_GET["chapter_ID"]);
@@ -40,9 +39,8 @@ if ( isset($_GET["action"]) ) {
 
 	switch ($_GET["adminAction"]) {
 		case "ajouterunchapitre":
-
-		if ( isset($_POST["login"], $_POST["password"]) ) {
-			connexion( $_POST["login"], $_POST["password"] );
+		if ( isset($_POST["username"], $_POST["password"]) ) {
+			connexion( $_POST["username"], $_POST["password"] );
 		} else {
 			session_start();
 			ajouterunchapitre();
@@ -56,13 +54,17 @@ if ( isset($_GET["action"]) ) {
 			getChapter($_GET["view"], $_GET["chapter_ID"]);
 		}
 			break;
+
 	    case "commentaires":
 
 	    if ( isset( $_GET["allowComment"] ) ) {
-	    	commentAdmin($_GET["allowComment"], $_GET["comment"]);
+	    	commentAdmin( $_GET["allowComment"], $_GET["comment_ID"] );
+	    } else if ( isset( $_GET["chapter_comment_id"] ) ) {
+	    	getCommentByChapter( $_GET["chapter_comment_id"] );
 	    } else {
-	    	getAdminComment();
+	    	getAdminComments( $_GET["btn"] );
 	    }
+
 			break;
 		case "message":
 		message();

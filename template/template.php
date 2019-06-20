@@ -15,5 +15,6 @@
 		<?= $header ?>		
 		<?= $body ?>
 		<?= $footer ?>
+		<?= $script ?>
     </body>
 </html>

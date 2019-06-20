@@ -54,7 +54,7 @@
 <section class="container mt-0" >
 	<div class="row d-flex justify-content-center">
 		<div class="col-lg-10 d-flex justify-content-left">
-			<form action="index.php?action=billet&&chapter_ID=<?php echo $_GET["chapter_ID"] ?>&view=client_view" method="post" class="col-md-10 p-0">
+			<form action="index.php?action=billet&chapter_ID=<?php echo $_GET["chapter_ID"] ?>&view=client_view" method="post" class="col-md-10 p-0">
 				<div class="form-row m-3 d-flex" style="margin-left: 0 !important;">
 					<div class="col-md-3 pl-0">
 						<label for="titre">Nom</label>
@@ -69,7 +69,7 @@
 					<label for="texte">Commentaire</label>
 					<textarea name="comment" type="text" class="form-control p-0" id="commentaire"></textarea>
 				</div>
-				<input type="hidden" name="dismiss" value="d">
+				<input type="hidden" name="bool" value="true">
 				<div class="col d-flex justify-content-left align-items-center col-lg-2 pl-0 mt-3">
 					<button id="button" class="btn btn-outline-secondary" type="submit" name="envoyer">Envoyer</button>
 				</div>
@@ -80,6 +80,13 @@
 <script src="js/menu_responsive.js"></script>
 
 <?php $body = ob_get_clean(); ?>
+
+<?php ob_start(); ?>
+<script src="js/menu_responsive.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<?php $script =  ob_get_clean();  ?>
 
 <?php ob_start(); ?>
 <?php require("footer/frontFooter.php") ?>

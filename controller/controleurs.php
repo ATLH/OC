@@ -5,6 +5,7 @@ require_once("model/billetsManager.php");
 require_once("model/commentManager.php");
 require_once("model/contactManager.php");
 require_once("model/signin.php");
+require_once("model/contactManager.php");
 
 // front controleurs
 
@@ -26,7 +27,7 @@ function getChapters($actionPost) {
     	require("frontView/billets.php");
     } if ( $actionPost === "meschapitres" ) {
     	require("backView/meschapitres.php");
-    }	
+    }
 }
 // Récupère un chapitres et ses commentaireq plus affichage 
 function getChapter($view, $actionPost) {
@@ -67,15 +68,20 @@ function connexionView(){
 
 // Switching function (Front || Admin)
 
+function connexion($username, $password) {
 
-function connexion($user_id, $password) {
 	$userSigninInstance = new signin();
-	$user = $userSigninInstance->userSignIn($user_id);
-	$passwordOk = password_verify($password, $user["password"]);
-	if ($passwordOk) {
+	$user = $userSigninInstance->userSignIn($username);
+
+	//Password à verifier
+	$user_password = $user["password"];
+
+	//Comparaison du mot de passe entré avec celui de l'utilisateur en BDD
+	$password = password_verify($password, $user_password);
+
+	if ($password) {
 		session_start(); 
-        $_SESSION["lastname"] = $user["lastname"];
-        $_SESSION["firstname"] = $user["user_ID"];
+        $_SESSION["username"] = $user["username"];
 		require("backView/ajouterunchapitre.php");
 	} else {
 		connexionView();
@@ -88,43 +94,46 @@ function ajouterunchapitre() {
 	require("backView/ajouterunchapitre.php");
 }
 
-
-
-///////////////////////////////////////////////////////////////////
-
-
-function commentAdmin($value ,$commentID) {
+// Valide ou supprime un commentaire en fonction de son ID
+function commentAdmin($allowComment ,$commentID) {
 	$commentManagerInstance = new commentManager();
 
-	if ( $value === "true" ) {
+	if ( $allowComment === "true" ) {
 		$commentManagerInstance->allowComment($commentID);
-		$CommentQuery = $commentManagerInstance->getModerationComment();
-		require("backView/commentaires.php");
+		getAdminComments("true");
 		} 
-	if ( $value === "false" ) {
+	if ( $allowComment === "false" ) {
 		$commentManagerInstance->deleteComment($commentID);
-		$CommentQuery = $commentManagerInstance->getModerationComment();
-		require("backView/commentaires.php");
+		getAdminComments("true");
 		} 
 }
-
-function getAdminComment() {
+// Affiche les commentaires coté admin
+function getAdminComments($btn) {
 	$commentManagerInstance = new commentManager();
-	$CommentQuery = $commentManagerInstance->getModerationComment();
+	$billetsManagerInstance = new BilletsManager();
+
+	$CommentQuery = $commentManagerInstance->getModerationComment($btn);
+	$bddQuery = $billetsManagerInstance->ticket_id();
+	$nwComment = $commentManagerInstance->getCountOfNewComment();
+
 	require("backView/commentaires.php");
 }
 
-function allowComments($vcomment) {
-	$commentManagerInstance = new commentManager();
-   
+function getCommentByChapter($commentByChapter){
+    $billetsManagerInstance = new BilletsManager();
+    $commentManagerInstance = new commentManager();
+
+    $nwComment = $commentManagerInstance->getCountOfNewComment();
+	$bddQuery = $billetsManagerInstance->ticket_id();
+	$CommentQuery = $commentManagerInstance->getCommentChapterID($commentByChapter);
+	require("backView/commentaires.php");
 }
 
-
-//////////////////////////////////////////////////////////////
 function message() {
+	$contactManagerInstance = new contactManager();
+	$message = $contactManagerInstance->getMessage();
 	require("backView/message.php");
 }
-
 
 ?>
 

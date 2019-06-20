@@ -22,10 +22,10 @@
             </a>
 		</div>
 		<div class="dropdown">
-			<button id="dropdown" class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Trier par chapitres</button>
+			<button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
 			<div class="dropdown-menu">
 				<?php while ( $comment_chapter_ID = $bddQuery->fetch() ) { ?>
-				<a id="dropdown-item" class="dropdown-item" href="index.php?adminAction=commentaires&chapter_comment_id=<?php echo $comment_chapter_ID["ID"] ?>">Chapitre <?php echo $comment_chapter_ID["ID"] ?></a>
+				<a class="dropdown-item" href="index.php?adminAction=commentaires&chapter_comment_id=<?php echo $comment_chapter_ID["ID"] ?>">Chapitre <?php echo $comment_chapter_ID["ID"] ?></a>
 				<?php
 			} 
 			?>
