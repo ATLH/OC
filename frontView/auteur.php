@@ -5,19 +5,26 @@
 <?php $header =  ob_get_clean();  ?>
 
 <?php ob_start(); ?>
-	<section id="auteurSection" class="container-fluid p-0">
-		<div class="row justify-content-center align-items-center m-0">
-		    <div>
-		    	<img id="bg3" src="images/bg3.jpg" class="w-100">
-		    </div>
-		    <div class="position-absolute d-flex justify-content-center align-items-center flex-column">
-		        <div>
-		    		<img id="author2" src="images/author2.jpg">
-		    	</div>
-		    	<div>
-		    		<h2 class="text-white m-2">Jean Forteroche</h2>
-		    	</div>
-		    </div>
+<div class="row d-flex justify-content-center mt-5">
+		<h2 class="text-dark m-2 mt-5">Auteur</h2>	
+	</div>
+	<section class="container">
+		
+		<div class="row d-flex justify-content-center align-items-center">
+			<div>
+				<img style="height: 400px;" class="img-fluid w-100" src="images/bg3.jpg">
+			</div>
+			<div style="height: 150px;"  class="d-flex justify-content-center align-items-center flex-column position-absolute">
+				<div class="d-flex justify-content-center">
+				    <h3 class="text-center text-white">Jean forteroche</h3>
+			    </div>
+                <div id="author2" >
+				    <img class="img-fluid rounded-circle" src="images/author2.jpg">
+			    </div>
+
+			    
+				
+			</div>
 		</div>
 	</section>
 	<section class="container-fluid">

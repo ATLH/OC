@@ -26,7 +26,7 @@
 						<p style="font-size: 15px;">Date : <?php echo $messages["lastname"]; ?></p>
 					</div>
 					<div>
-						<p style="font-size: 15px;" ><?php echo $messages["message"] ?>... </p>
+						<p style="font-size: 15px;" ><?php echo $messages["message"] ?></p>
 					</div>
 				</div>
 				<div class="d-flex justify-content-center align-items-center">

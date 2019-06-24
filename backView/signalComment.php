@@ -1,6 +1,6 @@
 <?php session_start(); ?>
 
-<?php $title = "commentaires du chapitre $chapter_id" ?>
+<?php $title = "Commentaire signaler" ?>
 
 <?php ob_start(); ?>
 <?php require("header/backHeader.php") ?>
@@ -10,7 +10,7 @@
 <div class="container" style="margin-top: 100px;">
 	<div class="row">
 		<div class="col-lg-12">
-			<h2 class="text-center">Commentaires du chapitre n°<?php echo $chapter_id ?> </h2>
+			<h2 class="text-center">Commentaires signaler</h2>
 		</div>
 	</div>
 </div>
@@ -38,28 +38,28 @@
 		</div>
 	</div>
 </div>
-
 <div class="container">
-	<?php while ( $commentByChapter = $CommentQuery->fetch() ) { ?>
+	<?php while ( $signalComment = $CommentQuery->fetch() ) { ?>
 		<div style="margin: 30px;" class="row d-flex justify-content-center">
 			<div class="col-lg-10">
 				<div id="commentMedia" class="rounded media d-flex justify-content-center align-items-center">
 					<div style="padding: 10px;" class="media-body">
 						<div>
-							<p style="font-size: 15px; margin: 0px;">De : <?php echo $commentByChapter["comment_lastname"]; ?></p>
-							<p style="font-size: 15px;">Date : <?php echo $commentByChapter["comment_date"]; ?></p>
+							<p style="font-size: 15px; margin: 0px;">De : <?php echo $signalComment["comment_lastname"]; ?></p>
+							<p style="font-size: 15px;">Date : <?php echo $signalComment["comment_date"]; ?></p>
 						</div>
-						<p style="font-size: 15px;" ><?php echo $commentByChapter["comment"] ?></p>
+						<p style="font-size: 15px;" ><?php echo $signalComment["comment"] ?></p>
 					</div>
 					<div class="d-flex justify-content-center align-items-center">
-					    <a title="Suprimer" href="index.php?adminAction=commentaires&allowComment=false&deleteCommentByChapter=true&comment_ID=<?php echo $commentByChapter["ID"] ?>&chapter_id=<?php echo $chapter_id ?>" class="btn btn-outline-danger d-block mr-4 btn-sm">Suprimer le commentaire</a>
+					    <a title="Suprimer" href="index.php?adminAction=commentaires&allowComment=false&deleteSignalComment=true&comment_ID=<?php echo $signalComment["ID"] ?>" class="btn btn-outline-danger d-block mr-4 btn-sm">Suprimer le commentaire</a>
 					</div>
 				</div>
 			</div>
 		</div>
+
 	<?php
-    } 
-    ?>
+} 
+?>
 </div>
 
 <?php $body = ob_get_clean(); ?>

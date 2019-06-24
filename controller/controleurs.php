@@ -5,7 +5,7 @@ require_once("model/billetsManager.php");
 require_once("model/commentManager.php");
 require_once("model/contactManager.php");
 require_once("model/signin.php");
-require_once("model/contactManager.php");
+
 
 // front controleurs
 
@@ -45,6 +45,12 @@ function getChapter($view, $actionPost) {
     }
    
 }
+
+function signalComment($signalComment){
+	$commentManagerInstance = new commentManager();
+	$commentManagerInstance->signalThisComment($signalComment);
+	
+}
 // Ajoute nouveau commentaires 
 function addNewComment() {
 	$commentManagerInstance = new commentManager();
@@ -82,7 +88,7 @@ function connexion($username, $password) {
 	if ($password) {
 		session_start(); 
         $_SESSION["username"] = $user["username"];
-		require("backView/ajouterunchapitre.php");
+		require("backView/meschapitres.php");
 	} else {
 		connexionView();
 	}
@@ -91,42 +97,61 @@ function connexion($username, $password) {
 // Admin controleurs
 
 function ajouterunchapitre() {
-	require("backView/ajouterunchapitre.php");
+	require("backView/meschapitres.php");
 }
 
-// Valide ou supprime un commentaire en fonction de son ID
+// Valide ou supprime un commentaire en fonction de son ID puis appel getAdminComments();
 function commentAdmin($allowComment ,$commentID) {
 	$commentManagerInstance = new commentManager();
 
 	if ( $allowComment === "true" ) {
 		$commentManagerInstance->allowComment($commentID);
-		getAdminComments("true");
+		
 		} 
 	if ( $allowComment === "false" ) {
 		$commentManagerInstance->deleteComment($commentID);
-		getAdminComments("true");
+		
 		} 
 }
-// Affiche les commentaires coté admin
+// Affiche tout les nouveau commentaires coté admin dans la vue commentaires.php
 function getAdminComments($btn) {
 	$commentManagerInstance = new commentManager();
 	$billetsManagerInstance = new BilletsManager();
 
+    // commentQuery est egal à tout les commentaires avec la valeur true
 	$CommentQuery = $commentManagerInstance->getModerationComment($btn);
+
+	$commentsAlerted = $commentManagerInstance->getCommentsAlerted();
 	$bddQuery = $billetsManagerInstance->ticket_id();
 	$nwComment = $commentManagerInstance->getCountOfNewComment();
 
-	require("backView/commentaires.php");
+	require("backView/nouveauCommentaires.php");
 }
 
 function getCommentByChapter($commentByChapter){
     $billetsManagerInstance = new BilletsManager();
     $commentManagerInstance = new commentManager();
 
+    // commentQuery est egal tout les commentaires de l'id $commentByChapter
+    $CommentQuery = $commentManagerInstance->getCommentChapterID($commentByChapter);
+    
+    $chapter_id = $commentByChapter;
+    $commentsAlerted = $commentManagerInstance->getCommentsAlerted();
     $nwComment = $commentManagerInstance->getCountOfNewComment();
 	$bddQuery = $billetsManagerInstance->ticket_id();
-	$CommentQuery = $commentManagerInstance->getCommentChapterID($commentByChapter);
-	require("backView/commentaires.php");
+	require("backView/commentairesByChapter.php");
+}
+function getAlertedComment(){
+    $billetsManagerInstance = new BilletsManager();
+	$commentManagerInstance = new commentManager();
+
+	$commentsAlerted = $commentManagerInstance->getCommentsAlerted();
+	$CommentQuery = $commentManagerInstance->getAllCommentAlerted();
+
+	$bddQuery = $billetsManagerInstance->ticket_id();
+
+	$nwComment = $commentManagerInstance->getCountOfNewComment();
+	require("backView/signalComment.php");
 }
 
 function message() {

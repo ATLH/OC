@@ -5,8 +5,13 @@
 <?php $header =  ob_get_clean();  ?>
 
 <?php ob_start(); ?>
+<div class="row d-flex justify-content-center mt-5">
+		<h2 class="text-dark m-2 mt-5">Billets</h2>	
+	</div>
 <section class="container">
+	
 <div class="row d-flex justify-content-center flex-wrap align-items-center">
+	
 <?php 
 while ($chapter = $bddQuery->fetch()) {
 ?>

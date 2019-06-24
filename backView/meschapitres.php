@@ -21,12 +21,14 @@
 	
 	<div style="margin: 30px;" class="row">
 		<div class="col-lg-12">
-			<div id="media" style="box-shadow: " class="rounded media  d-flex justify-content-center align-items-center">
+			<div id="media" style="box-shadow: " class="rounded media  d-flex justify-content-center align-items-center flex-wrap">
 				<img class="rounded" style="height: 250px; width: 250px; margin: 5px;" src="<?php echo $meschapitre["img_url"] ?>">
 				<div style="padding: 20px;" class="media-body">
 					<h4><?php echo $meschapitre["chapter_title"] ?></h4>
 					<p style="font-size: 18px;" > <?php echo $meschapitre["excerpt2"] ?>... </p>
-					<a href="index.php?adminAction=chapitre&chapter_ID=<?php echo $meschapitre["ID"]; ?>&view=admin_view" class="btn btn-outline-dark">Lire la suite</a>
+					<a href="index.php?adminAction=chapitre&chapter_ID=<?php echo $meschapitre["ID"]; ?>&view=admin_view" class="btn btn-outline-dark">Lire</a>
+					<a href="index.php?adminAction=chapitre&chapter_ID=<?php echo $meschapitre["ID"]; ?>&view=admin_view" class="btn btn-outline-dark">Modifier</a>
+					<a href="index.php?adminAction=chapitre&chapter_ID=<?php echo $meschapitre["ID"]; ?>&view=admin_view" class="btn btn-outline-danger">Suprimer</a>
 				</div>
 			</div>
 		</div>

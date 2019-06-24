@@ -22,7 +22,7 @@
 	</div>
 </section>
 <section class="container">
-	<div class="row d-flex justify-content-center">
+	<div class="row d-flex justify-content-center mb-3">
 		<div class="col-lg-10 d-flex justify-content-left">
 			<h4 class="text-dark" style="font-size: 20px; font-weight: lighter;">Commentaires</h4>
 		</div>
@@ -30,9 +30,23 @@
 	<div class="row d-flex justify-content-center">
 		<div class="col-lg-10 d-flex justify-content-left flex-column">
 			<?php while ($comment_table = $billetComment->fetch()) {
-				?> <div>
-					<p class="text-dark" style="font-size: 20px; font-weight: lighter;"><?php echo $comment_table["cd"] . " " ?><span style="font-weight: bold;">-</span><?php echo " " . $comment_table["comment"]; ?></p>
-				</div>
+				?> <div class="mb-2">
+					    <div class="mb-3">
+					    	<p class="mb-0" style="font-size: 15px;">De : <?php echo $comment_table["cf"] . " " . $comment_table["cl"]; ?></p>
+					    	<p class="mb-0" style="font-size: 15px;">Le : <?php echo $comment_table["cd"]; ?></p>
+					    </div>
+						<div>
+							<p class="mb-0" style="font-size: 19px; font-weight: lighter;"><?php echo $comment_table["comment"]; ?></p>
+						</div>
+						<div>
+							<a class="text-danger" href="index.php?action=billet&signalComment=true&view=client_view&chapter_ID=<?php echo $comment_table["ccid"] ?>&comment_ID=<?php echo $comment_table["cid"] ?>" style="font-size: 13px; cursor: pointer;">Signaler le commentaire</a>
+						</div>
+
+				   </div>
+				   <div class="d-flex justify-content-left w-50">
+				   	<hr class="w-100 border border-dark text-left">
+				   </div>
+				   
 			<?php } ?>
 		</div>
 	</div>

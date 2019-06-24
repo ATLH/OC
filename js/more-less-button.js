@@ -4,6 +4,7 @@ let commentContainer = document.getElementById("commentContainer"); // Div comme
 let containerHeight = parseFloat(getComputedStyle(commentContainer).height); // Hauteur initial
 
 
+
 class Plus_Minus {
 	constructor(button, elem, height, newHeight, plus_minus_elem){
 		this.button = button;

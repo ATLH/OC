@@ -15,8 +15,14 @@ if ( isset($_GET["action"]) ) {
 		case "billet":
 		if ( isset($_POST["lastname"], $_POST["firstname"], $_POST["comment"], $_GET["chapter_ID"], $_POST["bool"]) ) {
 			addNewComment();
-		}
-		if (isset($_GET["view"]) AND $_GET["view"] === "client_view") {
+			getChapter($_GET["view"], $_GET["chapter_ID"]);
+		} else if (isset($_GET["signalComment"]) AND $_GET["signalComment"] === "true") {
+			getChapter($_GET["view"], $_GET["chapter_ID"]);
+			signalComment($_GET["comment_ID"]);
+
+			
+
+		} else   {
 			getChapter($_GET["view"], $_GET["chapter_ID"]);
 		}
 		
@@ -38,16 +44,13 @@ if ( isset($_GET["action"]) ) {
 } else if ( isset($_GET["adminAction"]) ) {
 
 	switch ($_GET["adminAction"]) {
-		case "ajouterunchapitre":
+		case "meschapitres":
 		if ( isset($_POST["username"], $_POST["password"]) ) {
 			connexion( $_POST["username"], $_POST["password"] );
 		} else {
-			session_start();
-			ajouterunchapitre();
+			getChapters($_GET["adminAction"]);
 		}
-			break;
-		case "meschapitres":
-		getChapters($_GET["adminAction"]);
+		
 			break;
 		case "chapitre":
 		if (isset($_GET["view"]) AND $_GET["view"] === "admin_view") {
@@ -58,10 +61,41 @@ if ( isset($_GET["action"]) ) {
 	    case "commentaires":
 
 	    if ( isset( $_GET["allowComment"] ) ) {
-	    	commentAdmin( $_GET["allowComment"], $_GET["comment_ID"] );
-	    } else if ( isset( $_GET["chapter_comment_id"] ) ) {
-	    	getCommentByChapter( $_GET["chapter_comment_id"] );
-	    } else {
+
+	    	// Si j'ai $_GET["commentByChapter"] 
+	    	if ( isset($_GET["deleteCommentByChapter"] ) AND $_GET["deleteCommentByChapter"] === "true") {
+
+	    		commentAdmin( $_GET["allowComment"], $_GET["comment_ID"] );
+	    		getCommentByChapter($_GET["chapter_id"]);
+
+            //sinon c'est que j'ai $_GET["comment_ID"] donc je vais suprimer le commentaire avec son id en fonction de $_GET["allowComment"] qui est soit false ou true, puis j'appel l'affichage de tout les commentaire.
+	    	} else if (isset($_GET["deleteSignalComment"] ) AND $_GET["deleteSignalComment"] === "true") {
+	    		commentAdmin( $_GET["allowComment"], $_GET["comment_ID"] );
+	    		getAlertedComment();
+	    		
+	    	} else {
+
+	    		commentAdmin( $_GET["allowComment"], $_GET["comment_ID"] );
+	    		getAdminComments( "true" );
+	    	}
+
+	    	
+
+	    } 
+
+	    else if ( isset($_GET["btn"] ) AND $_GET["btn"] === "signal_comment" )  {
+	    	getAlertedComment();
+
+	    } 
+
+	    else if ( isset( $_GET["chapter_id"] ) ) {
+
+	    	getCommentByChapter( $_GET["chapter_id"] );
+
+	    } 
+
+	    else {
+
 	    	getAdminComments( $_GET["btn"] );
 	    }
 

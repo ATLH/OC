@@ -20,7 +20,6 @@ let blockquoteWidth = parseFloat(getComputedStyle(blockquote).width);
 let allQuotes = document.querySelectorAll("#slider blockquote");
 
 let lll = document.getElementById("lll");
-console.log(window.innerWidth);
 
 lll.addEventListener("click", function(){
 	let divMore = document.getElementById("divMore");
@@ -95,12 +94,6 @@ class Slider {
 let blockquoteSlider = new Slider (quoteSlider, quoteBtnleft, quoteBtnRight, -blockquoteWidth, allQuotes, lastQuote, firstQuote);
 
 let romanSlider = new Slider (bookSlider, btnLeftBook, btnRightBook, -bookWidth, allBooks, lastBook, firstBook);
-
-
-
-
-
-
 
 
 

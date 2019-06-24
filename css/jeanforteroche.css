@@ -7,13 +7,17 @@ a
 {
     text-decoration: none !important;
 }
+ul
+{
+    height: 54px !important;
+}
 cite
 {
     font-style: normal;
 }
 #bg3
 {
-    height: 400px;
+    height: 300px;
 }
 p
 {
@@ -30,9 +34,8 @@ p
 }
 #author2
 {
-    height: 200px; 
-    width: 200px; 
-    border-radius: 50%;
+    height: 100px; 
+    width: 100px; 
 }
 #author2Connexion
 {
@@ -80,12 +83,13 @@ p
 }
 #auteurSection
 {
-    height: 400px;
+    height: 200px;
+
 }
 #section1, #connexionSection
 {
     height: 600px;
-    margin-top: 70px;
+    margin-top: 55px;
 }
 #contactSection
 {
@@ -112,6 +116,10 @@ li
 {
     list-style: none;
 }
+li:hover
+{
+    background-color: lightgrey;
+}
 span
 {
     font-size: 20px;
@@ -132,7 +140,7 @@ span
 }
 #connexionContent
 {
-    height: 600px;
+    height: 400px;
 }
 #imgContent
 {

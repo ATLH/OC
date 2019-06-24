@@ -3,13 +3,13 @@
 class contactManager {
 	public function sendMessage () {
 		$bdd = $this->bddConnexion();
-		$saveMessage = $bdd->prepare("INSERT INTO contact_message (firstname, lastname, email, 	message) VALUES (?,?,?,?)");
+		$saveMessage = $bdd->prepare("INSERT INTO message (firstname, lastname, email, 	message) VALUES (?,?,?,?)");
 		$saveMessage->execute(array($_POST["firstname"], $_POST["lastname"], $_POST["email"], $_POST["message"] ));
 	}
 
 	public function getMessage () {
 		$bdd = $this->bddConnexion();
-        $message = $bdd->query("SELECT firstname, lastname, message FROM messages /*ORDER BY message_date ASC*/ ");
+        $message = $bdd->query("SELECT firstname, lastname, message FROM message /*ORDER BY message_date ASC*/ ");
 		return $message;
 	}
 

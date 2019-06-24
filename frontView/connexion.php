@@ -5,18 +5,20 @@
 <?php $header =  ob_get_clean();  ?>
 
 <?php ob_start(); ?>
-
-		<section id="connexionSection" class="container-fluid p-0">
+<div class="row d-flex justify-content-center mt-5">
+		<h2 class="text-dark m-2 mt-5">Connexion</h2>	
+	</div>
+		<section id="connexionSection" class="container p-0">
+			
 			<div id="connexionContent" class="row justify-content-center align-items-center flex-column m-0">
+				
 		    	<div class="d-flex justify-content-center align-items-center flex-column">
 		    		<div>
 		    			<img id="author2Connexion" src="images/author2.jpg">
 		    		</div>
-		    		<div>
-		    			<h2 class="text-dark m-2">Connexion</h2>
-		    		</div>
+		    		
 		    	</div>
-		    	<form action="index.php?adminAction=ajouterunchapitre" method="post" class="form-signin col-lg-8 d-flex justify-content-center align-items-center flex-column">
+		    	<form action="index.php?adminAction=meschapitres" method="post" class="form-signin col-lg-8 d-flex justify-content-center align-items-center flex-column">
 		    		<div class=" col-lg-4 d-flex justify-content-center align-items-center flex-column m-3">
 		    			<div id="inputContainer" class="col">
 		    				<input id="emailInput" class="form-control form-control-lg p-3" type="text" name="username" placeholder="Identifiant">		    			</div>

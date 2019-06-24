@@ -7,11 +7,12 @@
 <?php $header =  ob_get_clean();  ?>
 
 <?php ob_start(); ?>
+<div class="row d-flex justify-content-center mt-5">
+		<h2 class="text-dark m-2 mt-5">Contact</h2>	
+	</div>
        <section id="contactSection" class="container-fluid p-0">
 			<div class="row d-flex justify-content-center align-items-center m-0 flex-column">
-				<div class="col d-flex justify-content-center align-items-center">
-					<h3 class="text-center text-dark m-3">Contact</h3>
-				</div>
+				
 				<?php 
 				if (!empty($_POST)) {
 					$_SESSION["prenom"] = $_POST["firstname"];

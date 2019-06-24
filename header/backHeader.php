@@ -6,9 +6,6 @@
 	</div>
 	<ul class="nav navbar-nav d-lg-flex d-none d-lg-block justify-content-between align-items-center">
 		<li class="nav-item mr-1 ml-1">
-			<a class="nav-link text-dark" href="index.php?adminAction=ajouterunchapitre">Ajouter un chapitre</a>
-		</li>
-		<li class="nav-item mr-1 ml-1">
 			<a class="nav-link text-dark" href="index.php?adminAction=meschapitres">Mes chapitres</a>
 		</li>
 		<li class="nav-item mr-1 ml-1">
