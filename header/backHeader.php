@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-expand-lg bg-white justify-content-between align-items-center border-bottom border-grey">
+<nav class="navbar navbar-expand-lg bg-white fixed-top justify-content-between align-items-center border-bottom border-grey">
 	<div class="d-flex justify-content-start align-items-center ">
 		<a class="nav-link rounded" href="index.php?adminAction=ajouterunchapitre"><img style="width: 40px; height: 40px;" src="images/author2.jpg">
 		</a>
