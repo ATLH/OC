@@ -19,7 +19,7 @@
 		    		
 		    	</div>
 		    	<form action="index.php?adminAction=meschapitres" method="post" class="form-signin col-lg-8 d-flex justify-content-center align-items-center flex-column">
-		    		<div class=" col-lg-4 d-flex justify-content-center align-items-center flex-column m-3">
+		    		<div class=" col-lg-5 d-flex justify-content-center align-items-center flex-column m-3">
 		    			<div id="inputContainer" class="col">
 		    				<input id="emailInput" class="form-control form-control-lg p-3" type="text" name="username" placeholder="Identifiant">		    			</div>
 		    			<div class="col rounded-bottom">
@@ -30,7 +30,7 @@
 							<label class="form-check-label" for="rememberme">Se souvenir de moi</label>
 				        </div>
 				        <div class="col m-3 d-flex justify-content-center align-items-center">
-					       <button type="submit" name="seconnecter" class="btn btn-outline-dark m-2 col-lg-8">Se connecter</button>
+					       <button type="submit" name="connect" class="btn btn-dark btn-lg m-2 col-lg-8">Se connecter</button>
 				       </div>
 		    		</div>
 		    	</form>

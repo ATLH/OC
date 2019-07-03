@@ -1,5 +1,7 @@
-<?php $title = "Billet" ?>
+<?php session_start(); 
 
+?>
+<?php $title = "Billet" ?>
 <?php ob_start(); ?>
 <?php require("header/backHeader.php") ?>
 <?php $header =  ob_get_clean();  ?>

@@ -11,6 +11,10 @@ ul
 {
     height: 54px !important;
 }
+.tox-tinymce
+{
+    border-radius: 10px;
+}
 cite
 {
     font-style: normal;

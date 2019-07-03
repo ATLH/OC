@@ -5,6 +5,9 @@ require_once("model/billetsManager.php");
 require_once("model/commentManager.php");
 require_once("model/contactManager.php");
 require_once("model/signin.php");
+require_once("model/romansManager.php");
+
+
 
 
 // front controleurs
@@ -16,7 +19,8 @@ function auteur() {
 	require("frontView/auteur.php");
 }
 function romans() {
-    $bddQuery = romans();
+    $romansInstanceManager = new romansManager();
+    $getRomans = $romansInstanceManager->getRomans();
 	require("frontView/romans.php");
 }
 // Récupère la liste des chapitres plus affichage 
@@ -26,10 +30,51 @@ function getChapters($actionPost) {
 	if ( $actionPost === "billets" ) {
     	require("frontView/billets.php");
     } if ( $actionPost === "meschapitres" ) {
+    	session_start();
+
     	require("backView/meschapitres.php");
     }
 }
-// Récupère un chapitres et ses commentaireq plus affichage 
+
+function check_user($username, $password) {
+	$userSigninInstance = new signin();
+    
+	$user = $userSigninInstance->userSignIn($username);
+
+	$user_password = $user["password"];
+
+    $password_test = password_verify($password, $user_password);
+	
+
+	
+
+    if ($password_test) {
+    	//Initialisation de la variable de session $_SESSION["username"] dans le fichier meschpaitres.php 
+    	session_start(); 
+    	$_SESSION["username"] = ucfirst($user["username"]);
+    	
+
+        $billetsManagerInstance = new BilletsManager();
+	    $bddQuery = $billetsManagerInstance->tickets();
+	    require("backView/meschapitres.php");
+
+    }
+    else {
+    	connexionView();
+
+    }
+}
+
+
+function getChapterSession(){
+	    session_start();
+	   
+	    $billetsManagerInstance = new BilletsManager();
+	    $bddQuery = $billetsManagerInstance->tickets();
+	    require("backView/meschapitres.php");
+}
+
+// Récupère un chapitres et ses commentaires plus affichage 
 function getChapter($view, $actionPost) {
 	$billetsManagerInstance = new BilletsManager();
 	$commentManagerInstanceBillet = new commentManager();
@@ -51,6 +96,7 @@ function signalComment($signalComment){
 	$commentManagerInstance->signalThisComment($signalComment);
 	
 }
+
 // Ajoute nouveau commentaires 
 function addNewComment() {
 	$commentManagerInstance = new commentManager();
@@ -69,35 +115,18 @@ function addMessage() {
 
 function connexionView(){
 	require("frontView/connexion.php");
+
 }
 
 
 // Switching function (Front || Admin)
 
-function connexion($username, $password) {
 
-	$userSigninInstance = new signin();
-	$user = $userSigninInstance->userSignIn($username);
-
-	//Password à verifier
-	$user_password = $user["password"];
-
-	//Comparaison du mot de passe entré avec celui de l'utilisateur en BDD
-	$password = password_verify($password, $user_password);
-
-	if ($password) {
-		session_start(); 
-        $_SESSION["username"] = $user["username"];
-		require("backView/meschapitres.php");
-	} else {
-		connexionView();
-	}
-}
 
 // Admin controleurs
 
 function ajouterunchapitre() {
-	require("backView/meschapitres.php");
+	require("backView/ajouterunchapitre.php");
 }
 
 // Valide ou supprime un commentaire en fonction de son ID puis appel getAdminComments();
@@ -158,6 +187,14 @@ function message() {
 	$contactManagerInstance = new contactManager();
 	$message = $contactManagerInstance->getMessage();
 	require("backView/message.php");
+}
+
+function deconnexion(){
+	session_start(); 
+	$_SESSION = array();
+	session_destroy();
+	jeanforteroche();
+
 }
 
 ?>

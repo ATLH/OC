@@ -1,5 +1,6 @@
 <?php
 class BilletsManager {
+
 	public function tickets(){
 		$bdd = $this->bddConnexion();
 		$bddQuery = $bdd->query("SELECT LEFT(chapter_text, 100) AS excerpt, LEFT(chapter_text, 300) AS excerpt2, ID, chapter_title, chapter_date, img_url FROM chapitre ORDER BY ID DESC");
@@ -25,5 +26,6 @@ class BilletsManager {
 		//$bdd = new PDO("mysql:host=sofianewdmmila.mysql.db;dbname=sofianewdmmila;charset=utf8", "sofianewdmmila", "AttilAh44");
 		return $bdd;
     }
+    
 }
 ?>

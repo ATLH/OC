@@ -22,6 +22,9 @@ while ($chapter = $bddQuery->fetch()) {
     <h3 class="card-title" style="font-size: 20px;"><?php echo $chapter["chapter_title"]; ?></h3>
     <p class="card-text" style="font-size: 15px;"><?php echo $chapter["excerpt"]; ?>...</p>
     <a href="index.php?action=billet&chapter_ID=<?php echo $chapter["ID"] ?>&view=client_view" class="btn btn-outline-dark">Lire la suite</a>
+    <div class="text-right">
+    	<span class="" style="font-size: 15px;"><?php echo $chapter["chapter_date"]; ?></span>
+    </div>
   </div>
 </div>
 

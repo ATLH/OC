@@ -1,6 +1,4 @@
-<?php 
-	session_start(); 
-?>
+
 
 <?php $title = "mes chapitres" ?>
 
@@ -10,9 +8,12 @@
 
 <?php ob_start(); ?>
 <div class="container" style="margin-top: 100px;">
-	<div class="row">
+	<div class="row d-flex justify-content-center">
 		<div class="col-lg-12">
 			<h2 class="text-center">Mes chapitres</h2>
+		</div>
+		<div class="mt-5">
+			<a href="index.php?adminAction=meschapitres&addChapter=true" class="btn btn-outline-dark btn-lg">Ajouter un chapitre</a>
 		</div>
 	</div>
 </div>
@@ -21,7 +22,7 @@
 	
 	<div style="margin: 30px;" class="row">
 		<div class="col-lg-12">
-			<div id="media" style="box-shadow: " class="rounded media  d-flex justify-content-center align-items-center flex-wrap">
+			<div id="media"  class="rounded media  d-flex justify-content-center align-items-center flex-wrap">
 				<img class="rounded" style="height: 250px; width: 250px; margin: 5px;" src="<?php echo $meschapitre["img_url"] ?>">
 				<div style="padding: 20px;" class="media-body">
 					<h4><?php echo $meschapitre["chapter_title"] ?></h4>

@@ -1,10 +1,10 @@
 <?php  
 
 class SignIn {
-	public function userSignIn ($login) {
+	public function userSignIn ($username) {
 		$bdd = $this->bddConnexion();
 		$userQuery = $bdd->prepare("SELECT username, lastname, password FROM user WHERE username = ?");
-		$userQuery->execute(array($login));
+		$userQuery->execute(array($username));
 		$userData = $userQuery->fetch();		
 		return $userData;
 	}

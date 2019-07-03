@@ -1,7 +1,9 @@
+
 <nav class="navbar navbar-expand-lg bg-white justify-content-between align-items-center border-bottom border-grey">
 	<div class="d-flex justify-content-start align-items-center ">
 		<a class="nav-link rounded" href="index.php?adminAction=ajouterunchapitre"><img style="width: 40px; height: 40px;" src="images/author2.jpg">
 		</a>
+		<span><?php echo $_SESSION["username"]; ?></span>
 		
 	</div>
 	<ul class="nav navbar-nav d-lg-flex d-none d-lg-block justify-content-between align-items-center">

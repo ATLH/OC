@@ -44,15 +44,32 @@ if ( isset($_GET["action"]) ) {
 } else if ( isset($_GET["adminAction"]) ) {
 
 	switch ($_GET["adminAction"]) {
+
 		case "meschapitres":
-		if ( isset($_POST["username"], $_POST["password"]) ) {
-			connexion( $_POST["username"], $_POST["password"] );
+
+		if ( isset($_POST["connect"])) {
+
+			if ( !empty($_POST["username"]) AND !empty($_POST["password"]) ) {
+
+				$username = $_POST["username"];
+			    $password = $_POST["password"];
+			    check_user($username, $password); 
+				
+			} 
+			else {
+
+				connexionView();
+			}
+
+		} else if (isset($_GET["addChapter"]) AND $_GET["addChapter"] === "true") {
+			ajouterunchapitre();  
 		} else {
-			getChapters($_GET["adminAction"]);
-		}
-		
-			break;
+			getChapterSession();
+		} 
+		break;
+
 		case "chapitre":
+
 		if (isset($_GET["view"]) AND $_GET["view"] === "admin_view") {
 			getChapter($_GET["view"], $_GET["chapter_ID"]);
 		}
@@ -103,16 +120,27 @@ if ( isset($_GET["action"]) ) {
 		case "message":
 		message();
 			break;
-			/*
 		case "deconnexion":
 			deconnexion();
 			break;
-			*/
+			
 	}
 	
+} else if (isset($_GET["test"]) AND $_GET["test"] === "testView") {
+	require_once("frontView/testView.php");
 } else {
-
 	require_once("frontView/jeanforteroche.php");
+
+	
+
+	  /*$bdd = new PDO("mysql:host=sofianewdmmila.mysql.db;dbname=sofianewdmmila;charset=utf8", "sofianewdmmila", "AttilAh44");
+
+	  
+	  $bdd->exec("UPDATE chapitre SET chapter_title = \" Anchorage : partie 3 \" WHERE ID = 3 ");*/
+	  
+	
+
+
 
 	/*$bdd = new PDO("mysql:host=localhost;dbname=jean_forteroche;charset=utf8", "root", "", array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 

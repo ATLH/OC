@@ -10,7 +10,7 @@
 <div class="row d-flex justify-content-center mt-5">
 		<h2 class="text-dark m-2 mt-5">Contact</h2>	
 	</div>
-       <section id="contactSection" class="container-fluid p-0">
+       <section id="contactSection" class="container-fluid p-0" style="margin-top: 30px;">
 			<div class="row d-flex justify-content-center align-items-center m-0 flex-column">
 				
 				<?php 
