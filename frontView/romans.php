@@ -5,6 +5,8 @@
 <?php $header =  ob_get_clean();  ?>
 
 <?php ob_start(); ?>
+
+
 <div class="container" style="margin-top: 100px;">
 	<div class="row d-flex d-flex justify-content-center">
 		<div class="col-lg-12">
@@ -21,25 +23,20 @@
 
 <div class="container mt-5">
 	<div class="row d-flex justify-content-center flex-wrap align-items-center">
-		<?php while ($roman = $getRomans->fetch() ) {
+		<?php while ( $roman = $getRomans->fetch() ) {
 			?>
 	    <div class="card  m-3" style="width: 14rem;">
 			<img class="card-img-top" src="<?php echo $roman["img"]; ?>" style="height: 300px; width: auto;">
 			<div class="card-body">
 				<h3 class="card-title"><?php echo $roman["title"]; ?></h3>
-				<p class="card-text" style=" font-size: 15px;"><?php echo $roman["texte"]; ?></p>
+				<p class="card-text" style=" font-size: 15px;"><?php echo $roman["text"]; ?></p>
 			</div>
 		</div>
 	<?php
         } 
-        ?>
+    ?>
 	</div>
-	
-	
 </div>
-
-
-
 <?php $body = ob_get_clean(); ?>
 
 <?php ob_start(); ?>

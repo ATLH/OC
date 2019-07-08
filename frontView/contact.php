@@ -1,5 +1,3 @@
-<?php session_start(); ?>
-
 <?php $title = "Contact"; ?>
 
 <?php ob_start(); ?>
@@ -12,13 +10,12 @@
 	</div>
        <section id="contactSection" class="container-fluid p-0" style="margin-top: 30px;">
 			<div class="row d-flex justify-content-center align-items-center m-0 flex-column">
+				 <?php if (isset($message)) {
+			    	echo $message;
+			    } ?>
 				
-				<?php 
-				if (!empty($_POST)) {
-					$_SESSION["prenom"] = $_POST["firstname"];
-					echo "Merci pour votre message " . $_POST["firstname"] . " !";
-				} 
-				?>
+
+
 				<form action="index.php?action=contact" method="post" class="col-md-10">
 					<div class="form-row m-3 d-flex justify-content-center align-items-center">
 						<div class="col-md-5">
@@ -46,6 +43,7 @@
 					    <button type="submit" name="envoyer" class="btn btn-outline-dark m-2">Envoyer</button>
 				    </div>  
 			    </form>
+			   
 		    </div>
 		</section>
 		<script src="js/menu_responsive.js"></script>

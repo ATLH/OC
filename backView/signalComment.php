@@ -41,19 +41,23 @@
 <div class="container">
 	<?php while ( $signalComment = $CommentQuery->fetch() ) { ?>
 		<div style="margin: 30px;" class="row d-flex justify-content-center">
-			<div class="col-lg-10">
-				<div id="commentMedia" class="rounded media d-flex justify-content-center align-items-center">
-					<div style="padding: 10px;" class="media-body">
-						<div>
-							<p style="font-size: 15px; margin: 0px;">De : <?php echo $signalComment["comment_lastname"]; ?></p>
-							<p style="font-size: 15px;">Date : <?php echo $signalComment["comment_date"]; ?></p>
-						</div>
-						<p style="font-size: 15px;" ><?php echo $signalComment["comment"] ?></p>
-					</div>
-					<div class="d-flex justify-content-center align-items-center">
-					    <a title="Suprimer" href="index.php?adminAction=commentaires&allowComment=false&deleteSignalComment=true&comment_ID=<?php echo $signalComment["ID"] ?>" class="btn btn-outline-danger d-block mr-4 btn-sm">Suprimer le commentaire</a>
-					</div>
+			<div id="commentMedia" class="col-lg-10 rounded p-0">
+				<div class="text-right mt-1 mr-1">
+					<a href="index.php?adminAction=commentaires&allowComment=true&reallowComment=true&comment_ID=<?php echo $signalComment["ID"]?>"><i class="fas fa-times text-dark" style="font-size: 16px; cursor: pointer;"></i></a>
 				</div>
+					<div   class="media d-flex justify-content-center align-items-center">
+						<div style="padding: 10px;" class="media-body">
+							<div>
+								<p style="font-size: 15px; margin: 0px;">De : <?php echo $signalComment["comment_lastname"]; ?></p>
+								<p style="font-size: 15px;">Date : <?php echo $signalComment["comment_date"]; ?></p>
+							</div>
+							<p style="font-size: 15px;" ><?php echo $signalComment["comment"] ?></p>
+						</div>
+						<div class="d-flex justify-content-center align-items-center">
+						    <a title="Suprimer" href="index.php?adminAction=commentaires&allowComment=false&deleteSignalComment=true&comment_ID=<?php echo $signalComment["ID"] ?>" class="btn btn-outline-danger d-block mr-4 btn-sm">Suprimer le commentaire</a>
+						</div>
+					</div>
+				
 			</div>
 		</div>
 

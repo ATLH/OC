@@ -75,23 +75,36 @@ function getChapterSession(){
 }
 
 // Récupère un chapitres et ses commentaires plus affichage 
-function getChapter($view, $actionPost) {
+function getChapter($view, $actionPost, $message = null, $message2 = null, $set_chapter = null) {
 	$billetsManagerInstance = new BilletsManager();
 	$commentManagerInstanceBillet = new commentManager();
 
     if ($view === "admin_view") {
+    	if ($set_chapter === "true") {
+    		$billetView = $billetsManagerInstance->ticket($actionPost);
+    	    require("backView/set_chapter.php");
+    	} else {
     	$billetView = $billetsManagerInstance->ticket($actionPost);
     	require("backView/readChapter.php");
+    }
     } 
     if ($view === "client_view") {
-    	$billetView = $billetsManagerInstance->ticket($actionPost);
-	    $billetComment = $commentManagerInstanceBillet->getComment($actionPost);
-	    require("frontView/billet.php");
+    	if ($message || $message2) {
+    		$billetView = $billetsManagerInstance->ticket($actionPost);
+	        $billetComment = $commentManagerInstanceBillet->getComment($actionPost);
+	        require("frontView/billet.php");
+    	} else {
+    		$billetView = $billetsManagerInstance->ticket($actionPost);
+	        $billetComment = $commentManagerInstanceBillet->getComment($actionPost);
+	        require("frontView/billet.php");
+    	}
+    	
     }
    
 }
 
 function signalComment($signalComment){
+
 	$commentManagerInstance = new commentManager();
 	$commentManagerInstance->signalThisComment($signalComment);
 	
@@ -110,6 +123,11 @@ function contact() {
 function addMessage() {
 	$contactManagerInstance = new contactManager();
 	$contactManagerInstance->sendMessage();
+	
+}
+
+function alertMessage($message) {
+	$message;
 	require("frontView/contact.php");
 }
 
@@ -124,11 +142,19 @@ function connexionView(){
 
 
 // Admin controleurs
+function add_new_chapter($chapter_title,$chapter_text, $img_url){
+	$billetsManagerInstance = new billetsManager();
+	$billetsManagerInstance->add_new_chapter($chapter_title, $chapter_text, $img_url);
+}
 
-function ajouterunchapitre() {
+function ajouterunchapitre($message = null) {
 	require("backView/ajouterunchapitre.php");
 }
 
+function reallowComment($commentID){
+	$commentManagerInstance = new commentManager();
+	$commentManagerInstance->reAllowThisComment($commentID);
+}
 // Valide ou supprime un commentaire en fonction de son ID puis appel getAdminComments();
 function commentAdmin($allowComment ,$commentID) {
 	$commentManagerInstance = new commentManager();

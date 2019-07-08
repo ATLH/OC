@@ -13,11 +13,38 @@ if ( isset($_GET["action"]) ) {
 			getChapters($_GET["action"]);
 			break;
 		case "billet":
-		if ( isset($_POST["lastname"], $_POST["firstname"], $_POST["comment"], $_GET["chapter_ID"], $_POST["bool"]) ) {
-			addNewComment();
-			getChapter($_GET["view"], $_GET["chapter_ID"]);
+
+		if ( isset($_POST["envoyer"]) ) {
+
+			if ( !empty($_POST["lastname"]) && !empty($_POST["firstname"]) && !empty($_POST["comment"]) ) {
+				$lastname = htmlspecialchars($_POST["lastname"]);
+				$firstname = htmlspecialchars($_POST["firstname"]);
+				$comment = htmlspecialchars($_POST["comment"]);
+
+				$lastnameLenght = strlen($lastname);
+				$firstname = strlen($firstname);
+
+				if ( $lastnameLenght <= 20 && $firstnameLenght <= 20 ) {
+					addNewComment();
+			        getChapter($_GET["view"], $_GET["chapter_ID"]);
+				} else {
+					$message2 = "Le champs prénom ou nom est trop long";
+					getChapter($_GET["view"], $_GET["chapter_ID"], null ,$message2);
+				}
+			} else {
+				$message2 = "Tous les champs doivent être remplis !";
+				getChapter($_GET["view"], $_GET["chapter_ID"], null, $message2);
+			}
+			
+		
+	
+		
+			
+
 		} else if (isset($_GET["signalComment"]) AND $_GET["signalComment"] === "true") {
-			getChapter($_GET["view"], $_GET["chapter_ID"]);
+
+			getChapter($_GET["view"], $_GET["chapter_ID"], "Le commentaire à bien était signaler ");
+			
 			signalComment($_GET["comment_ID"]);
 
 			
@@ -28,8 +55,33 @@ if ( isset($_GET["action"]) ) {
 		
 			break;
 		case "contact":
-		if ( isset($_POST["firstname"], $_POST["lastname"], $_POST["email"], $_POST["message"]) ) {
-			addMessage();
+
+		if ( isset($_POST["envoyer"]) ) {
+
+			if (!empty($_POST["firstname"]) && !empty($_POST["lastname"]) && !empty($_POST["email"]) && !empty($_POST["message"])) {
+				$firstname = htmlspecialchars($_POST["firstname"]);
+				$lastname = htmlspecialchars($_POST["lastname"]);
+				$email = htmlspecialchars($_POST["email"]);
+				$message = htmlspecialchars($_POST["message"]);
+
+				$firstnameLenght = strlen($firstname);
+				$lastnameLenght = strlen($lastname);
+				$emailLenght = strlen($email);
+
+				if ( $firstnameLenght <= 30 && $lastnameLenght <= 30 && $emailLenght <= 30 ) {
+					$message = "Merci pour votre message " . $firstname . " !";
+					alertMessage($message);
+					addMessage();
+
+				} else {
+					$message = "Nombre de caractère pour le nom, le prénom ou l'email trop long";
+					alertMessage($message);
+				}
+				
+			} else {
+				$message = "Tous les champs doivent être remplis !";
+				alertMessage($message);
+			}
 		} else {
 			contact();
 		}
@@ -62,7 +114,75 @@ if ( isset($_GET["action"]) ) {
 			}
 
 		} else if (isset($_GET["addChapter"]) AND $_GET["addChapter"] === "true") {
-			ajouterunchapitre();  
+
+			if (isset($_GET["add_new_chapter"]) && $_GET["add_new_chapter"] === "true" ) {
+
+				if (isset($_POST["envoyer"])) {
+
+					if (isset($_FILES["img_url"])) {
+
+						$file_name = $_FILES["img_url"]["name"];
+						$file_tmp_name = $_FILES["img_url"]["tmp_name"];
+						$file_size = $_FILES["img_url"]["size"];
+						$file_error = $_FILES["img_url"]["error"];
+
+						if (is_uploaded_file($file_tmp_name)) {
+
+							$get_file_ext = explode(".", $file_name);
+							$file_ext = strtolower(end($get_file_ext));
+							$ext_array = array("jpg", "jpeg", "png" );
+
+							if (in_array($file_ext, $ext_array)) {
+
+								if ($file_error === 0) {
+
+									if ($file_size <= 1000000) {
+
+										$new_file_name = "images/". $file_name;
+
+										if (move_uploaded_file($file_tmp_name, $new_file_name)) {
+
+											$chapter_title = $_POST["chapter_title"];
+								            $img_url = $new_file_name;
+								            $chapter_text = htmlspecialchars(strip_tags($_POST["chapter_text"]));
+								            $message = "Nouveau chapitre ajoutée !";
+
+								            add_new_chapter($chapter_title, $chapter_text, $img_url);
+								            ajouterunchapitre($message);
+								            
+
+								        } else {
+								        	$message = "Erreur pendant le téléchargement du fichier 1";
+								        	ajouterunchapitre($message);
+								        }
+								    } else {
+								    	$message = "Fichier trop lourd";
+								    	ajouterunchapitre($message);
+								    }
+								} else {
+									$message = "Erreur pendant le téléchargement du fichier 2";
+									ajouterunchapitre($message);
+								}
+							} else {
+								$message = "Extension de fichier invalide. Extesion autoriser ( \"jpg\", \"jpeg\", \"png\", ) ";
+				                ajouterunchapitre($message);
+				            }
+				        } else {
+				        	$message = "Aucun fichier télécharger";
+			                ajouterunchapitre($message);
+			            }
+			        } else {
+			        	$message = "Veuillez selectionner un fichier";
+		                ajouterunchapitre($message);
+		            }
+		        } else {
+
+		        }
+				
+			} else {
+				ajouterunchapitre();  
+			}
+			
 		} else {
 			getChapterSession();
 		} 
@@ -71,8 +191,14 @@ if ( isset($_GET["action"]) ) {
 		case "chapitre":
 
 		if (isset($_GET["view"]) AND $_GET["view"] === "admin_view") {
+			if (isset($_GET["set_chapter"]) AND $_GET["set_chapter"] === "true") {
+				
+				getChapter($_GET["view"], $_GET["chapter_ID"], null, null, $_GET["set_chapter"]);
+				
+			} else {
 			getChapter($_GET["view"], $_GET["chapter_ID"]);
 		}
+	}
 			break;
 
 	    case "commentaires":
@@ -90,6 +216,10 @@ if ( isset($_GET["action"]) ) {
 	    		commentAdmin( $_GET["allowComment"], $_GET["comment_ID"] );
 	    		getAlertedComment();
 	    		
+	    	} else if (isset($_GET["reallowComment"] ) AND $_GET["reallowComment"] === "true") {
+	    		reallowComment($_GET["comment_ID"] );
+                getAlertedComment();
+	    		
 	    	} else {
 
 	    		commentAdmin( $_GET["allowComment"], $_GET["comment_ID"] );
@@ -102,6 +232,7 @@ if ( isset($_GET["action"]) ) {
 
 	    else if ( isset($_GET["btn"] ) AND $_GET["btn"] === "signal_comment" )  {
 	    	getAlertedComment();
+
 
 	    } 
 

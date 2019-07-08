@@ -15,13 +15,13 @@
 				<a class="nav-link text-dark" href="index.php?action=romans">Romans</a>
 			</li>
 			<li class="nav-item mr-1 ml-1 d-flex align-items-center">
-				<a class="nav-link text-dark" href="index.php?action=billets">Billets</a>
+				<a class="nav-link text-dark" href="index.php?action=billets">Chapitre</a>
 			</li>
 			<li class="nav-item mr-1 ml-1 d-flex align-items-center">
 				<a class="nav-link text-dark" href="index.php?action=contact">Contact</a>
 			</li>
 			<li class="nav-item mr-1 ml-1 d-flex align-items-center">
-				<a class="nav-link text-dark" href="index.php?action=connexion">Connexion</a>
+				<a class="nav-link text-dark" href="index.php?action=connexion">Admin</a>
 			</li>
 		</ul>
 		<div class="d-block d-lg-none">

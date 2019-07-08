@@ -1,4 +1,4 @@
-<?php $title = "Billet" ?>
+<?php $title = "Chapitre" ?>
 
 <?php ob_start(); ?>
 <?php require("header/frontHeader.php") ?>
@@ -9,6 +9,11 @@
 	<div style="position: relative; height: 500px;" class="container d-flex justify-content-center align-items-center">
 		<img style="position: absolute; width: 100%; border-radius: 5px; height: 500px;" src="<?php echo $billetView["img_url"]; ?>">
 		<h3 style="position: absolute; z-index: 2; font-size: 40px;" class="text-white"><?php echo $billetView["chapter_title"] ?></h3>
+	</div>
+	<div class="container text-right">
+		<p class="m-0 mt-2">
+			<?php echo $billetView["chapter_date"] ?>
+		</p>	
 	</div>
 </section>
 
@@ -23,7 +28,11 @@
 </section>
 <section class="container">
 	<div class="row d-flex justify-content-center mb-3">
-		<div class="col-lg-10 d-flex justify-content-left">
+		<div class="col-lg-10 d-flex justify-content-left flex-column">
+			 <?php if (isset($message)) { ?>
+			 	<span class="text-danger" style="font-size: 15px;"><?php echo $message . "!"; ?></span>
+			 	<?php	
+			    } ?>
 			<h4 class="text-dark" style="font-size: 20px; font-weight: lighter;">Commentaires</h4>
 		</div>
 	</div>
@@ -56,6 +65,12 @@
 		<div class="col-lg-10 d-flex justify-content-left">
 			<h4 class="text-dark" style="font-size: 20px; font-weight: lighter;">Ajouter un commentaire</h4>
 		</div>
+		<div class="col-lg-10 d-flex justify-content-left">
+		 <?php if (isset($message2)) { ?>
+			 	<span class="text-danger" style="font-size: 15px;"><?php echo $message2; ?></span>
+			 	<?php	
+			    } ?>
+	    </div>
 	</div>
 </section>
 <section class="container mt-0" style="height: 30px; font-size: 20px; font-weight: lighter;">

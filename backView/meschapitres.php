@@ -25,12 +25,18 @@
 			<div id="media"  class="rounded media  d-flex justify-content-center align-items-center flex-wrap">
 				<img class="rounded" style="height: 250px; width: 250px; margin: 5px;" src="<?php echo $meschapitre["img_url"] ?>">
 				<div style="padding: 20px;" class="media-body">
-					<h4><?php echo $meschapitre["chapter_title"] ?></h4>
-					<p style="font-size: 18px;" > <?php echo $meschapitre["excerpt2"] ?>... </p>
+					<h4><?php echo $meschapitre["chapter_title"]; ?></h4>
+					<p style="font-size: 18px;" > <?php echo $meschapitre["excerpt2"]; ?>... </p>
 					<a href="index.php?adminAction=chapitre&chapter_ID=<?php echo $meschapitre["ID"]; ?>&view=admin_view" class="btn btn-outline-dark">Lire</a>
-					<a href="index.php?adminAction=chapitre&chapter_ID=<?php echo $meschapitre["ID"]; ?>&view=admin_view" class="btn btn-outline-dark">Modifier</a>
+					<a href="index.php?adminAction=chapitre&chapter_ID=<?php echo $meschapitre["ID"]; ?>&view=admin_view&set_chapter=true" class="btn btn-outline-dark">Modifier</a>
 					<a href="index.php?adminAction=chapitre&chapter_ID=<?php echo $meschapitre["ID"]; ?>&view=admin_view" class="btn btn-outline-danger">Suprimer</a>
+					<div class="text-right float-right">
+					<p class="m-0 mt-2" style="font-size: 15px;">
+						<?php echo $meschapitre["chapter_date"]; ?>
+				    </p>	
+	            </div>	
 				</div>
+				
 			</div>
 		</div>
 	</div>

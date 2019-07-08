@@ -1,6 +1,7 @@
 <?php session_start(); 
 
 ?>
+
 <?php $title = "commentaires du chapitre $chapter_id" ?>
 
 <?php ob_start(); ?>

@@ -12,6 +12,11 @@
 		<img style="position: absolute; width: 100%; border-radius: 5px; height: 500px;" src="<?php echo $billetView["img_url"]; ?>">
 		<h3 style="position: absolute; z-index: 2; font-size: 40px;" class="text-white"><?php echo $billetView["chapter_title"] ?></h3>
 	</div>
+	<div class="container text-right">
+		<p class="m-0 mt-2">
+			<?php echo $billetView["chapter_date"] ?>
+		</p>	
+	</div>
 </section>
 
 <section class="container">

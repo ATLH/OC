@@ -6,7 +6,7 @@
 
 <?php ob_start(); ?>
 <div class="row d-flex justify-content-center mt-5">
-		<h2 class="text-dark m-2 mt-5">Billets</h2>	
+		<h2 class="text-dark m-2 mt-5">Chapitres</h2>	
 	</div>
 <section class="container">
 	

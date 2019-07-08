@@ -6,37 +6,34 @@
 
 <?php ob_start(); ?>
 <div class="container mt-5 pt-5" style="height: 600px;">
-	<h2 class="text-center">Contact</h2>
+	<h2 class="text-center">Cryptage .htpasswd</h2>
 	<form action="testView.php" method="post">
 		<div class="form-row d-flex justify-content-center">
 			<div class="form-group col-lg-4">
-				<label for="firstname">Title</label>
-				<input class="form-control" type="text" name="title" id="title">
+				<label for="firstname">Login</label>
+				<input class="form-control" type="text" name="login" id="title">
 			</div>
 			<div class="form-group col-lg-4">
-				<label for="lastname">Text</label>
-				<input class="form-control" type="text" name="text" id="text">
-			</div>
-			<div class="form-group col-lg-4">
-				<label for="img">Image</label>
-				<input class="form-control" type="text" name="image" id="img">
+				<label for="lastname">Mot de passe</label>
+				<input class="form-control" type="password" name="password" id="text">
 			</div>
 		</div>
-		
-		
-			<div class="form-group col-lg-5">
-				<button id="button" class="btn btn-outline-secondary" type="submit" name="envoyer">Envoyer</button>
-			</div>
+		<div class="form-group col-lg-5">
+			<button id="button" class="btn btn-outline-secondary" type="submit" name="envoyer">Envoyer</button>
+		</div>
 	</form>
 </div>
 
 				<?php 
-				if ( isset($_POST["title"], $_POST["text"], $_POST["image"]) ) {
-					$bdd = new PDO("mysql:host=sofianewdmmila.mysql.db;dbname=sofianewdmmila;charset=utf8", "sofianewdmmila", "AttilAh44");
+				if ( isset($_POST["login"], $_POST["password"]) ) {
+					//$bdd = new PDO("mysql:host=sofianewdmmila.mysql.db;dbname=sofianewdmmila;charset=utf8", "sofianewdmmila", "AttilAh44");
 					//$bdd = new PDO("mysql:host=localhost;dbname=jean_forteroche;charset=utf8", "root","");
-					$bddInsert = $bdd->prepare("INSERT INTO romans(title, texte, img) VALUES (?,?,?)");
-					$bddInsert->execute( array($_POST["title"], $_POST["text"], $_POST["image"] ) );
+					//$bddInsert = $bdd->prepare("INSERT INTO romans(title, texte, img) VALUES (?,?,?)");
+					//$bddInsert->execute( array($_POST["title"], $_POST["text"], $_POST["image"] ) );
+					$login = $_POST["login"];
+					$passwdCrypt = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
+					echo "login : " . $login . " password Crypt " . $passwdCrypt . "<br>";
 				echo "<pre>";
 				 print_r($_POST);
 				echo "</pre>";
