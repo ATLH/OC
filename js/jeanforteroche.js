@@ -1,4 +1,3 @@
-
 // Book Slider
 let bookSlider = document.getElementById("bookSlider");
 let btnLeftBook = document.getElementById("btnLeftBook");
@@ -113,5 +112,5 @@ let romanSlider = new Slider (bookSlider, btnLeftBook, btnRightBook, -bookWidth,
 if (window.matchMedia("(max-width: 700px)").matches) {
     let headline = document.getElementById("headline");
     headline.style.display = "block";
-    headline.innerHTML = "Le nouveau roman, signer jeanforteroche.";
+    headline.innerHTML = "Le nouveau roman, de jeanforteroche.";
 }

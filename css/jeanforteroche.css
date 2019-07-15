@@ -107,7 +107,7 @@ section
 {
     height: inherit;
     max-width: 1500px;
-    margin-top: 70px;
+    margin-top: 56px;
 }
 footer
 {
@@ -249,6 +249,14 @@ form
 }
 @media all and (max-width: 700px)
 {
+    #connexionSection
+    {
+        margin-top: 25px !important;
+    }
+    #section1
+    {
+        margin-top: 60px;
+    }
     #smartphone_Button
     {
     display: block;
@@ -367,6 +375,51 @@ form
     #lll
     {
         margin-top: 20px;
+    }
+    h4 
+    {
+        
+        margin-top: 15px !important;
+    }
+    #media img
+    {
+        margin: 0px !important;
+        width: 100% !important;
+    }
+    
+    .media-body a
+    {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+    
+    #img-container, #chapter_img
+    {
+        height: 200px !important;
+        border-radius: 0px !important;
+    }
+    #author_name, #chapter_date
+    {
+        font-size: 10px !important;
+
+    }
+    #author_name
+    {
+         margin-left: 15px !important;
+    }
+    #name
+    {
+        font-size: 15px;
+    }
+    #description
+    {
+        font-size: 14px;
+    }
+    cite
+    {
+        font-size: 2rem;
     }
 
 }

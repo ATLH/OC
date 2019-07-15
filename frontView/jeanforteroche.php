@@ -1,9 +1,7 @@
 <?php $title = "jeanforteroche"; ?>
-
 <?php ob_start(); ?>
 <?php require("header/frontHeader.php") ?>
 <?php $header =  ob_get_clean();  ?>
-
 <?php ob_start(); ?>
 <section id="section1" class="container-fluid p-0">
 	<div class="row m-0 position-relative">
@@ -20,7 +18,7 @@
 				<img class="h-50" src="images/brave.jpg" >
 			</div>
 			<div id="smartphone_Button" class="col-xs-12 text-center">
-				<button type="button" class="btn btn-outline-light m-2 col-xs-12 d-block">En savoir plus</button>
+				<a href="index.php?action=billets" role="button" class="btn btn-outline-light m-2 col-xs-12 d-block" >En savoir plus</a>
 			</div>
 		</div>
 	</div>
@@ -113,21 +111,16 @@
 		</div>
 	</div>
 </section>
-<script src="js/jeanforteroche.js"></script>
-<script src="js/menu_responsive.js"></script>
-
 <?php $body = ob_get_clean(); ?>
-
 <?php ob_start(); ?>
 <script src="js/menu_responsive.js"></script>
+<script src="js/jeanforteroche.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <?php $script =  ob_get_clean();  ?>
-
 <?php ob_start(); ?>
 <?php require("footer/frontFooter.php") ?>
 <?php $footer =  ob_get_clean();  ?>
-
 <?php require("template/template.php"); ?>
 

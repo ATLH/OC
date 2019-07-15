@@ -98,107 +98,168 @@ if ( isset($_GET["action"]) ) {
 	switch ($_GET["adminAction"]) {
 
 		case "meschapitres":
-
+		// 
 		if ( isset($_POST["connect"])) {
-
+			// check de valeurs non nul
 			if ( !empty($_POST["username"]) AND !empty($_POST["password"]) ) {
 
 				$username = $_POST["username"];
 			    $password = $_POST["password"];
 			    check_user($username, $password); 
 				
-			} 
-			else {
-
+			} else {
 				connexionView();
 			}
 
-		} else if (isset($_GET["addChapter"]) AND $_GET["addChapter"] === "true") {
-
-			if (isset($_GET["add_new_chapter"]) && $_GET["add_new_chapter"] === "true" ) {
-
-				if (isset($_POST["envoyer"])) {
-
-					if (isset($_FILES["img_url"])) {
-
-						$file_name = $_FILES["img_url"]["name"];
-						$file_tmp_name = $_FILES["img_url"]["tmp_name"];
-						$file_size = $_FILES["img_url"]["size"];
-						$file_error = $_FILES["img_url"]["error"];
-
-						if (is_uploaded_file($file_tmp_name)) {
-
-							$get_file_ext = explode(".", $file_name);
-							$file_ext = strtolower(end($get_file_ext));
-							$ext_array = array("jpg", "jpeg", "png" );
-
-							if (in_array($file_ext, $ext_array)) {
-
-								if ($file_error === 0) {
-
-									if ($file_size <= 1000000) {
-
-										$new_file_name = "images/". $file_name;
-
-										if (move_uploaded_file($file_tmp_name, $new_file_name)) {
-
-											$chapter_title = $_POST["chapter_title"];
-								            $img_url = $new_file_name;
-								            $chapter_text = htmlspecialchars(strip_tags($_POST["chapter_text"]));
-								            $message = "Nouveau chapitre ajoutée !";
-
-								            add_new_chapter($chapter_title, $chapter_text, $img_url);
-								            ajouterunchapitre($message);
-								            
-
-								        } else {
-								        	$message = "Erreur pendant le téléchargement du fichier 1";
-								        	ajouterunchapitre($message);
-								        }
-								    } else {
-								    	$message = "Fichier trop lourd";
-								    	ajouterunchapitre($message);
-								    }
-								} else {
-									$message = "Erreur pendant le téléchargement du fichier 2";
-									ajouterunchapitre($message);
-								}
-							} else {
-								$message = "Extension de fichier invalide. Extesion autoriser ( \"jpg\", \"jpeg\", \"png\", ) ";
-				                ajouterunchapitre($message);
-				            }
-				        } else {
-				        	$message = "Aucun fichier télécharger";
-			                ajouterunchapitre($message);
-			            }
-			        } else {
-			        	$message = "Veuillez selectionner un fichier";
-		                ajouterunchapitre($message);
-		            }
-		        } else {
-
-		        }
-				
-			} else {
-				ajouterunchapitre();  
-			}
-			
 		} else {
-			getChapterSession();
-		} 
+				getChapterSession();
+			} 
 		break;
 
 		case "chapitre":
 
 		if (isset($_GET["view"]) AND $_GET["view"] === "admin_view") {
-			if (isset($_GET["set_chapter"]) AND $_GET["set_chapter"] === "true") {
-				
-				getChapter($_GET["view"], $_GET["chapter_ID"], null, null, $_GET["set_chapter"]);
-				
-			} else {
-			getChapter($_GET["view"], $_GET["chapter_ID"]);
-		}
-	}
+			if ( isset($_GET["addChapter"]) AND $_GET["addChapter"] === "true" ) {
+				if (isset($_POST["envoyer"])) {
+
+					$chapter_title = $_POST["chapter_title"];
+					$chapter_text = $_POST["chapter_text"];
+
+					if (isset($chapter_title) AND isset($chapter_text)) {
+
+						if (!empty($chapter_title) AND !empty($chapter_text)) {
+							if (isset($_FILES["img_url"])) {
+								$file_name = $_FILES["img_url"]["name"];
+								$file_tmp_name = $_FILES["img_url"]["tmp_name"];
+							    $file_size = $_FILES["img_url"]["size"];
+							    $file_error = $_FILES["img_url"]["error"];
+								if (is_uploaded_file($file_tmp_name)) {
+									$get_file_ext = explode(".", $file_name);
+							    	$file_ext = strtolower(end($get_file_ext));
+							    	$ext_array = array("jpg", "jpeg", "png" );
+							    	if (in_array($file_ext, $ext_array)) {
+							    		if ($file_error === 0) {
+							    			if ($file_size <= 1000000) {
+							    				$new_file_name = "images/". $file_name;
+							    				if (move_uploaded_file($file_tmp_name, $new_file_name)) {
+							    					$img_url = $new_file_name;
+								                    $message = "Nouveau chapitre ajoutée !";
+
+								                    add_new_chapter($chapter_title, $chapter_text, $img_url);
+								                    new_Chapter($message);
+							    					
+							    				} else {
+							    					$message = "Erreur pendant le téléchargement du fichier";
+								        	        getChapter($view, $chapter_id, $message, null, $set_chapter);
+							    				}
+							    			} else {
+							    				$message = "Fichier trop lourd";
+								    	        getChapter($view, $chapter_id, $message, null, $set_chapter);
+							    			}
+							    		} else {
+							    			$message = "Erreur de téléchargement veuillez réessayer";
+								    		getChapter($view, $chapter_id, $message, null, $set_chapter);
+							    		}
+							    		
+							    	} else {
+							    		$message = "Extension de fichier invalide. Extesion autoriser ( jpg, jpeg, png, ) ";
+								    	getChapter($view, $chapter_id, $message, null, $set_chapter);
+							    	}
+								} else {
+									$message = "Veuillez selectionner un fichier";
+									getChapter($view, $chapter_id, $message, null, $set_chapter);
+								}
+							} else {
+								$message = "Champ manquant";
+								getChapter($view, $chapter_id, $message, null, $set_chapter);
+							}
+							
+						} else {
+							$message = "Tout les champs doivent etre remplis";
+							getChapter($view, $chapter_id, $message, null, $set_chapter);
+						}
+						
+					} else {
+						$message = "Champ manquant";
+					getChapter($view, $chapter_id, $message, null, $set_chapter);
+					}
+
+				} else {
+					new_Chapter(); 
+				}
+			} else if (isset($_GET["read_Chapter"]) AND $_GET["read_Chapter"] === "true") {
+				getChapter($_GET["view"], $_GET["chapter_ID"]);
+			} else if (isset($_GET["set_chapter"]) AND $_GET["set_chapter"] === "true") {
+
+				$set_chapter = $_GET["set_chapter"];
+				$view = $_GET["view"];
+				$chapter_id = $_GET["chapter_ID"];
+
+				if (isset($_POST["update_chapter"])) {
+					$chapter_title = $_POST["chapter_title"];
+					$chapter_text = $_POST["chapter_text"];
+					if (isset($chapter_title) AND isset($chapter_text)) {
+						if (!empty($chapter_title) AND !empty($chapter_text)) {
+							if (isset($_FILES["img_url"])) {
+								$file_name = $_FILES["img_url"]["name"];
+								$file_tmp_name = $_FILES["img_url"]["tmp_name"];
+							    $file_size = $_FILES["img_url"]["size"];
+							    $file_error = $_FILES["img_url"]["error"];
+								if (is_uploaded_file($file_tmp_name)) {
+									$get_file_ext = explode(".", $file_name);
+							    	$file_ext = strtolower(end($get_file_ext));
+							    	$ext_array = array("jpg", "jpeg", "png" );
+							    	if (in_array($file_ext, $ext_array)) {
+							    		if ($file_error === 0) {
+							    			if ($file_size <= 1000000) {
+							    				$new_file_name = "images/". $file_name;
+							    				if (move_uploaded_file($file_tmp_name, $new_file_name)) {
+							    					$img_url = $new_file_name;
+								                    $message = "Le chapitre à était modifier !";
+
+								                    update_Chapter($chapter_title, $chapter_text, $img_url, $chapter_id);
+								                    getChapter($view, $chapter_id, $message, null, $set_chapter);
+							    					
+							    				} else {
+							    					$message = "Erreur pendant le téléchargement du fichier";
+								        	        getChapter($view, $chapter_id, $message, null, $set_chapter);
+							    				}
+							    			} else {
+							    				$message = "Fichier trop lourd";
+								    	        getChapter($view, $chapter_id, $message, null, $set_chapter);
+							    			}
+							    		} else {
+							    			$message = "Erreur de téléchargement veuillez réessayer";
+								    		getChapter($view, $chapter_id, $message, null, $set_chapter);
+							    		}
+							    		
+							    	} else {
+							    		$message = "Extension de fichier invalide. Extesion autoriser ( jpg, jpeg, png, ) ";
+								    	getChapter($view, $chapter_id, $message, null, $set_chapter);
+							    	}
+								} else {
+									$message = "Veuillez selectionner un fichier";
+									getChapter($view, $chapter_id, $message, null, $set_chapter);
+								}
+							} else {
+								$message = "Champ manquant";
+								getChapter($view, $chapter_id, $message, null, $set_chapter);
+							}
+							
+						} else {
+							$message = "Tout les champs doivent etre remplis";
+							getChapter($view, $chapter_id, $message, null, $set_chapter);
+						}
+						
+					} else {
+						$message = "Champ manquant";
+					getChapter($view, $chapter_id, $message, null, $set_chapter);
+					}
+				} else {
+					getChapter($view, $chapter_id, null, null, $set_chapter);
+				}
+			}
+		} 
 			break;
 
 	    case "commentaires":
@@ -228,9 +289,13 @@ if ( isset($_GET["action"]) ) {
 
 	    	
 
-	    } 
-
-	    else if ( isset($_GET["btn"] ) AND $_GET["btn"] === "signal_comment" )  {
+	    } else if (isset($_GET["msg"])) {
+	    	
+	    	$msg_query = $_GET["msg"];
+	    	$msg_id = $_GET["msg_id"];
+	    	message_admin($msg_query, $msg_id);
+	    	
+	    } else if ( isset($_GET["btn"] ) AND $_GET["btn"] === "signal_comment" )  {
 	    	getAlertedComment();
 
 

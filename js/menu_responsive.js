@@ -7,7 +7,6 @@ let i = 0;
 
 toggler.addEventListener("click", function(){
 	overlay.innerHTML = itemContainer.innerHTML;
-	overlay.innerHTML = itemContainer.innerHTML;
 	if (i == 0) {
 		i++;
 	    overlay.style.transform = "translateX(" + 0 + "%)";
